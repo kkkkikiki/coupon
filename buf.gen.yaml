@@ -1,0 +1,15 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/kkkkikiki/coupon/gen
+plugins:
+  - local: /Users/peter/go/bin/protoc-gen-go
+    out: gen
+    opt:
+      - paths=source_relative
+  - local: /Users/peter/go/bin/protoc-gen-connect-go
+    out: gen
+    opt:
+      - paths=source_relative

@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package coupon.v1;
+
+option go_package = "github.com/kkkkikiki/coupon/gen/coupon/v1;couponv1";
+
+import "google/protobuf/timestamp.proto";
+
+// CouponService provides methods for managing coupon campaigns and issuing coupons
+service CouponService {
+  // CreateCampaign creates a new coupon campaign
+  rpc CreateCampaign(CreateCampaignRequest) returns (CreateCampaignResponse);
+  
+  // GetCampaign gets campaign information including all issued coupon codes
+  rpc GetCampaign(GetCampaignRequest) returns (GetCampaignResponse);
+  
+  // IssueCoupon requests coupon issuance on specific campaign
+  rpc IssueCoupon(IssueCouponRequest) returns (IssueCouponResponse);
+}
+
+// Campaign represents a coupon campaign
+message Campaign {
+  int64 id = 1;
+  int32 available_coupons = 2;  // Number of available coupons
+  google.protobuf.Timestamp start_date = 3;  // Specific start date and time
+  repeated string issued_coupon_codes = 4;  // Only successfully issued coupon codes
+}
+
+// Coupon represents an issued coupon
+message Coupon {
+  string code = 1;
+  int64 campaign_id = 2;
+}
+
+// CreateCampaignRequest
+message CreateCampaignRequest {
+  int32 available_coupons = 1;  // Number of available coupons
+  google.protobuf.Timestamp start_date = 2;  // Specific start date and time
+}
+
+// CreateCampaignResponse
+message CreateCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// GetCampaignRequest
+message GetCampaignRequest {
+  int64 campaign_id = 1;
+}
+
+// GetCampaignResponse
+message GetCampaignResponse {
+  Campaign campaign = 1;
+}
+
+// IssueCouponRequest
+message IssueCouponRequest {
+  int64 campaign_id = 1;
+}
+
+// IssueCouponResponse
+message IssueCouponResponse {
+  Coupon coupon = 1;
+}
