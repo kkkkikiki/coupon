@@ -10,6 +10,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/prometheus/client_golang v1.22.0
 	github.com/sethvargo/go-envconfig v1.3.0
+	golang.org/x/time v0.12.0
 	google.golang.org/protobuf v1.36.6
 )
 
